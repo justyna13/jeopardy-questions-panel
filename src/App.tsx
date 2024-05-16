@@ -81,6 +81,8 @@ function App() {
       ) : (
         <div className="bg-[#2a3698] w-screen h-screen flex flex-col">
           <div className="w-300 my-4 ml-4">
+            <h1 className="text-3xl text-white mb-4">Jeopardy Panel</h1>
+
             <input
               type="text"
               placeholder="Adres MQTT"
