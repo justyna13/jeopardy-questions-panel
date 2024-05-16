@@ -9,11 +9,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #2a3698;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 .jeopardy-question-container {
   width: 100%;
-  height: 100vh;
+  height: auto;
   background-color: #2a3698;
 
   &-cat {

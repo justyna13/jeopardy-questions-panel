@@ -58,7 +58,7 @@ function App() {
             className={
               'flex items-center justify-center jeopardy-question-container-cat py-3'
             }>
-            <p>
+            <p className={'text-3xl'}>
               {question?.category_title} - {question?.points}
             </p>
           </div>
@@ -68,7 +68,7 @@ function App() {
               <p>Team: {btnPressed}</p>
             </div>
           )}
-          <div className={'jeopardy-question-container-content'}>
+          <div className={'jeopardy-question-container-content my-14'}>
             {question?.question_content}
           </div>
           <div className={'py-3 pl-4 !bg-gray-500 !text-black'}>
@@ -80,21 +80,23 @@ function App() {
         </div>
       ) : (
         <div className="bg-[#2a3698] w-screen h-screen flex flex-col">
-          <div className="w-300 my-4 ml-4">
-            <h1 className="text-3xl text-white mb-4">Jeopardy Panel</h1>
+          <div className="w-300 my-4 ml-4 flex flex-col">
+            <h1 className="text-3xl text-white mb-8 max-w-[200px]">
+              Jeopardy Panel
+            </h1>
 
             <input
               type="text"
               placeholder="Adres MQTT"
               value={hostAddress}
-              className="border-2 border-black px-4 py-3 leading-9 mb-6 rounded-xl outline-none hover:outline-none"
+              className="border-2 border-black px-4 py-3 leading-9 mb-6 rounded-xl outline-none hover:outline-none max-w-[300px]"
               onChange={(e) => setHostAddress(e.target.value)}
             />
 
             <button
               type="button"
               onClick={startConnection}
-              className="py-2.5 px-10 me-2 mb-2 text-xl font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10">
+              className="py-2.5 px-10 me-2 mb-2 text-xl font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 max-w-[300px]">
               Połącz
             </button>
           </div>
