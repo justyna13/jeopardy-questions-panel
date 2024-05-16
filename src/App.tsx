@@ -1,14 +1,14 @@
 import mqtt from 'mqtt';
 import { useEffect, useState } from 'react';
 
-import { IGetGameDataResponse } from '@/types/api.ts';
+import { IGetGameDataResponse, TTeam } from '@/types/api.ts';
 
 function App() {
   const [hostAddress, setHostAddress] = useState(
     localStorage.getItem('mqttHost') || ''
   );
   const [question, setQuestion] = useState<IGetGameDataResponse | null>(null);
-  const [btnPressed, setBtnPressed] = useState<number>(-1);
+  const [btnPressed, setBtnPressed] = useState<TTeam | null>(null);
 
   const [client, setClient] = useState<mqtt.MqttClient | null>(null);
 
@@ -29,7 +29,7 @@ function App() {
     client.on('connect', () => {
       localStorage.setItem('mqttHost', hostAddress);
       mqttSub('quiz/selected_question');
-      mqttSub('quiz/triggered');
+      mqttSub('quiz/selected_team');
     });
 
     client.on('message', (topic, message) => {
@@ -37,9 +37,10 @@ function App() {
         setQuestion(JSON.parse(message.toString()));
       }
 
-      if (topic == 'quiz/triggered') {
-        const msg: { first_btn_num: number } = JSON.parse(message.toString());
-        setBtnPressed(msg.first_btn_num);
+      if (topic == 'quiz/selected_team') {
+        const msg: { team: TTeam } = JSON.parse(message.toString());
+        console.log(msg.team);
+        setBtnPressed(msg.team);
       }
     });
   }, [client]);
@@ -62,10 +63,12 @@ function App() {
               {question?.category_title} - {question?.points}
             </p>
           </div>
-          {btnPressed !== -1 && (
+          {btnPressed && (
             <div
               className={'flex items-center justify-center bg-green-700 py-3'}>
-              <p>Team: {btnPressed}</p>
+              <p>
+                Team: <b>{btnPressed?.name}</b>
+              </p>
             </div>
           )}
           <div className={'jeopardy-question-container-content my-14'}>

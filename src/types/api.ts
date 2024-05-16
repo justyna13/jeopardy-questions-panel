@@ -4,3 +4,10 @@ export interface IGetGameDataResponse {
   question_content: string;
   answer: string;
 }
+
+export type TTeam = {
+  uid: string;
+  name: string;
+  points: number;
+  deviceUid: string;
+};
